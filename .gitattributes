@@ -1,0 +1,36 @@
+## 
+# Details per file setting:
+#   text    These files should be normalized (i.e. convert CRLF to LF).
+######################################################################
+
+# Auto detect
+##   Handle line endings automatically for files detected as
+##   text and leave all files detected as binary untouched.
+##   This will handle all files NOT defined below.
+*                 text=auto
+
+# Source code
+*.js              text
+*.json            text
+*.ts              text
+
+# Documentation
+*.md              text diff=markdown
+*.txt             text
+*README*          text
+
+# Configs
+.editorconfig     text
+.env              text
+.gitattributes    text
+.gitconfig        text
+*.lock            text -diff
+package.json      text eol=lf
+package-lock.json text eol=lf -diff
+.prettierrc       text
+
+# RC files (like .babelrc or .eslintrc)
+*.*rc             text
+
+# Ignore files (like .npmignore or .gitignore)
+*.*ignore         text
