@@ -30,5 +30,6 @@ dist/
 .DS_Store
 
 # dotenv environment variable files
+.env
 .env.development
 .env.production
