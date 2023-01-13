@@ -1,7 +1,11 @@
 {
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "compilerOptions": {
-    "module": "ES6",
-    "target": "ES6",
+    "module": "ESNext",
+    "target": "ESNext",
     "allowJs": true,
     "moduleResolution": "node",
     "strict": true,
@@ -17,13 +21,15 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["./src/*"]
+    },
     "sourceMap": true,
-    "outDir": "./dist/",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "types": ["node"],
     "lib": ["ES6"]
-  },
-  "ts-node": {
-    "esm": true 
   },
   "files": ["src/index.ts"],
   "include": ["src/**/*.ts"],
