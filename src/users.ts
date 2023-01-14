@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid'
 
-import { User, UserID } from 'types'
+import { User, UserID } from './types'
 
-const users = new Map<UserID, User>()
+export const users = new Map<UserID, User>()
 
 function User(data: Omit<User, 'id'>): User {
   return {
@@ -11,27 +11,30 @@ function User(data: Omit<User, 'id'>): User {
   }
 }
 
-export function createUser(data: Omit<User, 'id'>) {
-  const newUser = User(data)
-  users.set(newUser.id, newUser)
-  return newUser
-}
-
 export function getUsers() {
-  return [...users]
+  return [...users.values()]
 }
 
 export function getUser(id: UserID) {
   return users.get(id)
 }
 
-export function updateUser(id: UserID, user: User) {
-  if (!users.has(id)) return null
+export function createUser(data: Omit<User, 'id'>) {
+  const newUser = User(data)
+  users.set(newUser.id, newUser)
+  return newUser
+}
 
+export function updateUser(id: UserID, user: User) {
   users.set(id, user)
   return user
 }
 
 export function deleteUser(id: UserID) {
   users.delete(id)
+  return id
+}
+
+export function isUserExists(id: UserID) {
+  return users.has(id)
 }

@@ -1,43 +1,18 @@
 import http from 'node:http'
 import dotenv from 'dotenv'
 
-import { getUsers } from './users'
+import * as constants from './constants'
+import routes from './routes'
 
 dotenv.config()
 
 const host = 'localhost'
-const port = Number(process.env.PORT) || 8000
+const port = Number(process.env.PORT) || constants.PORT
 
 const server = http.createServer()
 
-server.on('request', (req, resp) => {
-  const { method, url } = req
-
-  resp.writeHead(200, { 'Content-Type': 'application/json' })
-
-  if (method === 'GET') {
-    switch (url) {
-      case '/api/users': {
-        const users = getUsers()
-
-        resp.end(
-          JSON.stringify({
-            data: users
-          })
-        )
-        break
-      }
-      default:
-        resp.writeHead(404)
-        resp.end(
-          JSON.stringify({
-            data: 'Not Found'
-          })
-        )
-    }
-  }
-})
+server.on('request', routes)
 
 server.listen(port, host, () => {
-  console.log(`listening on http://${host}:${port}`)
+  console.log(`server listening on http://${host}:${port}`)
 })
