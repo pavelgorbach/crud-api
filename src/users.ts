@@ -26,7 +26,8 @@ export function createUser(data: Omit<User, 'id'>) {
 }
 
 export function updateUser(id: UserID, user: User) {
-  users.set(id, user)
+  const userObj = getUser(id)
+  users.set(id, { ...userObj, ...user })
   return user
 }
 
