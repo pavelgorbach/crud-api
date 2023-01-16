@@ -7,6 +7,7 @@
   "scripts": {
     "start:dev": "nodemon --watch 'src/**' --ext 'ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/index.ts'",
     "start:prod": "npm run build && node dist/main.mjs",
+    "start:multi": "multi",
     "build": "webpack --mode=production --node-env=production --config webpack.config.cjs",
     "lint": "TIMING=1 eslint 'src/**/*.ts'",
     "lint:fix": "eslint --fix 'src/**/*.ts'",
