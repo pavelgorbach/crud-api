@@ -2,7 +2,9 @@ import { describe, it, expect } from '@jest/globals'
 import request from 'supertest'
 
 import { User } from './types'
-import { server } from './index'
+import { createApp } from './index'
+
+const app = createApp()
 
 const user: Omit<User, 'id'> = {
   username: 'John Doe',
@@ -11,20 +13,20 @@ const user: Omit<User, 'id'> = {
 }
 describe('GET /users', function () {
   it('responds with json', function (done) {
-    request(server).get('/api/users').expect('Content-Type', /json/, done)
+    request(app).get('/api/users').expect('Content-Type', /json/, done)
   })
   it('responds with an empty array', async function () {
-    const response = await request(server).get('/api/users')
+    const response = await request(app).get('/api/users')
     expect(response.body).toEqual([])
   })
   it('responds with statusCode 200', function (done) {
-    request(server).get('/api/users').expect(200, done)
+    request(app).get('/api/users').expect(200, done)
   })
 })
 
 describe('POST /users', function () {
   it('responds with statusCode 201', async function () {
-    const response = await request(server).post('/api/users').send(user)
+    const response = await request(app).post('/api/users').send(user)
     expect(response.headers['content-type']).toMatch(/json/)
     expect(response.status).toEqual(201)
     expect(response.body.username).toEqual(user.username)
@@ -35,9 +37,9 @@ describe('POST /users', function () {
 
 describe('DELETE /users/{userId}', function () {
   it('responds with statusCode 204 (record found and deleted)', async function () {
-    const userResponse = await request(server).post('/api/users').send(user)
+    const userResponse = await request(app).post('/api/users').send(user)
     const url = `/api/users/${userResponse.body.id}`
-    const response = await request(server).delete(url)
+    const response = await request(app).delete(url)
     expect(response.status).toEqual(204)
   })
 })
