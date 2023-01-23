@@ -3,10 +3,11 @@
 ## Installing
 1. clone the repo: `git clone https://github.com/pavelgorbach/crud-api.git`
 2. go to the project forlder: `cd crud-api`
+3. checkout to `dev` branch: `git checkout dev`
 3. install dependencies: `npm install`
 
 ## Running
-Create `.env` file at the project root. Add a content: `PORT=8000`.
+Create `.env` file at the project root. Add a content: `PORT=4000`.
 
 There are three options to run:
 1. `npm run start:dev`
